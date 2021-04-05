@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'Display.dart';
-// import 'Button.dart';
+
 import 'utils/calculation.dart';
+
+import 'Display.dart';
+import 'Button.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -9,56 +11,44 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  _updateOutput (String text) {
+    setState(() {
+      Calc.output = Calc.result(text, Calc.output);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: <Widget>[
-          Display(output: output),
+          Display(output: Calc.output),
           Row(children: <Widget>[
-            keyOutlineButton("9"),
-            keyOutlineButton("8"),
-            keyOutlineButton("7"),
-            keyOutlineButton("+"),
+            Button(character: "9", updateOutput: _updateOutput),
+            Button(character: "8", updateOutput: _updateOutput),
+            Button(character: "7", updateOutput: _updateOutput),
+            Button(character: "+", updateOutput: _updateOutput),
           ]),
           Row(children: <Widget>[
-            keyOutlineButton("6"),
-            keyOutlineButton("5"),
-            keyOutlineButton("4"),
-            keyOutlineButton("-"),
+            Button(character: "6", updateOutput: _updateOutput),
+            Button(character: "5", updateOutput: _updateOutput),
+            Button(character: "4", updateOutput: _updateOutput),
+            Button(character: "-", updateOutput: _updateOutput),
           ]),
           Row(children: <Widget>[
-            keyOutlineButton("3"),
-            keyOutlineButton("2"),
-            keyOutlineButton("1"),
-            keyOutlineButton("*"),
+            Button(character: "3", updateOutput: _updateOutput),
+            Button(character: "2", updateOutput: _updateOutput),
+            Button(character: "1", updateOutput: _updateOutput),
+            Button(character: "*", updateOutput: _updateOutput),
           ]),
           Row(children: <Widget>[
-            keyOutlineButton("C"),
-            keyOutlineButton("0"),
-            keyOutlineButton("="),
-            keyOutlineButton("/"),
+            Button(character: "C", updateOutput: _updateOutput),
+            Button(character: "0", updateOutput: _updateOutput),
+            Button(character: "=", updateOutput: _updateOutput),
+            Button(character: "/", updateOutput: _updateOutput),
           ])
         ],
       ),
-    );
-  }
-
-  String output = "";
-
-  Widget keyOutlineButton(String text) {
-    return Expanded(
-      child: OutlineButton(
-        padding: EdgeInsets.all(25.0),
-        onPressed: () => setState(() {
-          output = Calc.onKeyPress(text, output);
-        }),
-        child: Text(
-          "$text",
-          style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.w500),
-        )
-      )
     );
   }
 }

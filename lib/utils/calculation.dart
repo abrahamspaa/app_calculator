@@ -1,8 +1,9 @@
 class Calc {
+  static String output = "";
   static String calculation, sign;
   static int first, second;
 
-  static onKeyPress(String keyName, String output) {
+  static result(String keyName, String output) {
     if (keyName == "C") {
       calculation = "";
       output = "";
